@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Momo GUI Controller</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="./index.js"></script>
 </head>
 
 <body>
@@ -162,9 +161,13 @@
         </section>
     </div>
     <section>
-        <button>リセット</button>
-        <button>実行</button>
+        <div class="execute-command-area">
+            <pre><code id="execute-command">$ ./momo</code></pre>
+        </div>
+        <button id="reset-button">リセット</button>
+        <button id="run-button">実行</button>
     </section>
 </body>
+<script src="./index.js"></script>
 
 </html>
