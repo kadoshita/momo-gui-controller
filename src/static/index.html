@@ -39,7 +39,17 @@
             <h3>ayameモードオプション</h3>
             <div class="option-item">
                 <label>
-                    <input type="text" name="dclient-id" value="">クライアントID
+                    <input type="text" name="SIGNALING-URL" value="" required>シグナリングホスト
+                </label>
+            </div>
+            <div class="option-item">
+                <label>
+                    <input type="text" name="ROOM-ID" value="" required>ルームID
+                </label>
+            </div>
+            <div class="option-item">
+                <label>
+                    <input type="text" name="client-id" value="">クライアントID
                 </label>
             </div>
             <div class="option-item">
@@ -50,6 +60,16 @@
         </section>
         <section class="sora-subcommand-options">
             <h3>soraモードオプション</h3>
+            <div class="option-item">
+                <label>
+                    <input type="text" name="SIGNALING-URL" value="" required>シグナリングホスト
+                </label>
+            </div>
+            <div class="option-item">
+                <label>
+                    <input type="text" name="CHANNEL-ID" value="" required>チャンネルID
+                </label>
+            </div>
             <div class="option-item">
                 <label><input type="checkbox" name="auto" value="--auto">自動接続する</label>
             </div>

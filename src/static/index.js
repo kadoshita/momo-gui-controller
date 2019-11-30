@@ -2,7 +2,30 @@
     const executeCommandText = document.getElementById('execute-command');
     const runButton = document.getElementById('run-button');
     const resetButton = document.getElementById('reset-button');
+
     const subcommandRadioButton = document.getElementsByName('subcommand');
+    const testSubcommandOptions = document.getElementsByClassName('test-subcommand-options')[0];
+    const ayameSubcommandOptions = document.getElementsByClassName('ayame-subcommand-options')[0];
+    const soraSubcommandOptions = document.getElementsByClassName('sora-subcommand-options')[0];
+
+    const AYAME_SIGNALING_URL_Option = document.getElementsByName('SIGNALING-URL')[0];
+    const ROOM_ID_Option = document.getElementsByName('ROOM-ID')[0];
+    const SORA_SIGNALING_URL_Option = document.getElementsByName('SIGNALING-URL')[1];
+    const CHANNEL_ID_Option = document.getElementsByName('CHANNEL-ID')[0];
+
+    const documentRootOption = document.getElementsByName('document-root')[0];
+    const clientIdOption = document.getElementsByName('client-id')[0];
+    const signalingKeyOption = document.getElementsByName('signaling-key')[0];
+    const autoOption = document.getElementsByName('auto')[0];
+    const videoCodecOption = document.getElementsByName('video-codec')[0];
+    const audioCodecOption = document.getElementsByName('audio-codec')[0];
+    const videoBitrateOption = document.getElementsByName('video-bitrate')[0];
+    const audioBitrateOption = document.getElementsByName('audio-bitrate')[0];
+    const multistreamOption = document.getElementsByName('multistream')[0];
+    const roleOption = document.getElementsByName('role')[0];
+    const spotlightOption = document.getElementsByName('spotlight')[0];
+    const metadataOption = document.getElementsByName('metadata')[0];
+
     const noVideoOption = document.getElementsByName('no-video')[0];
     const noAudioOption = document.getElementsByName('no-audio')[0];
     const forceI420Option = document.getElementsByName('force-i420')[0];
@@ -25,15 +48,47 @@
     const disableNoiseSuppressionOption = document.getElementsByName('disable-noise-suppression')[0];
     const disableHighpassFilterOption = document.getElementsByName('disable-highpass-filter')[0];
     const disableTypingDetectionOption = document.getElementsByName('disable-typing-detection')[0];
-    let subcommand = '';
+    let subcommand = 'test';
+    let options = [];
 
-    runButton.addEventListener('click', () => {
+    const init = () => {
+        testSubcommandOptions.style.display = 'block';
+        ayameSubcommandOptions.style.display = 'none';
+        soraSubcommandOptions.style.display = 'none';
+
         for (let i in subcommandRadioButton) {
-            if (subcommandRadioButton[i].checked) {
-                subcommand = subcommandRadioButton[i].value;
-            }
+            subcommandRadioButton[i].onchange = e => {
+                subcommand = e.target.value;
+                switch (subcommand) {
+                    case 'test':
+                        testSubcommandOptions.style.display = 'block';
+                        ayameSubcommandOptions.style.display = 'none';
+                        soraSubcommandOptions.style.display = 'none';
+                        break;
+                    case 'ayame':
+                        testSubcommandOptions.style.display = 'none';
+                        ayameSubcommandOptions.style.display = 'block';
+                        soraSubcommandOptions.style.display = 'none';
+                        break;
+                    case 'sora':
+                        testSubcommandOptions.style.display = 'none';
+                        ayameSubcommandOptions.style.display = 'none';
+                        soraSubcommandOptions.style.display = 'block';
+                        break;
+                    default:
+                        testSubcommandOptions.style.display = 'block';
+                        ayameSubcommandOptions.style.display = 'none';
+                        soraSubcommandOptions.style.display = 'none';
+                        break;
+                }
+            };
         }
-        let options = [];
+
+        updateExecuteCommandText();
+    };
+
+    const updateExecuteCommandText = () => {
+        options = [];
         if (noVideoOption.checked) {
             options.push(noVideoOption.value);
         }
@@ -101,11 +156,91 @@
             options.push(disableTypingDetectionOption.value);
         }
 
+        options.push(subcommand);
+
+        if (subcommand === 'test') {
+            if (documentRootOption.value !== '') {
+                options.push('--document-root ' + documentRootOption.value);
+            }
+        } else if (subcommand === 'ayame') {
+            if (AYAME_SIGNALING_URL_Option.value !== '') {
+                options.push(AYAME_SIGNALING_URL_Option.value);
+            } else {
+                console.error('You MUST set SIGNALING-URL when ayame mode.');
+            }
+            if (ROOM_ID_Option.value !== '') {
+                options.push(ROOM_ID_Option.value);
+            } else {
+                console.error('You MUST set ROOM-ID when ayame mode.');
+            }
+            if (clientIdOption.value !== '') {
+                options.push('--client-id ' + clientIdOption.value);
+            }
+            if (signalingKeyOption.value !== '') {
+                options.push('--signaling-key ' + signalingKeyOption.value);
+            }
+        } else if (subcommand === 'sora') {
+            if (SORA_SIGNALING_URL_Option.value !== '') {
+                options.push(SORA_SIGNALING_URL_Option.value);
+            } else {
+                console.error('You MUST set SIGNALING-URL when sora mode.');
+            }
+            if (CHANNEL_ID_Option.value !== '') {
+                options.push(CHANNEL_ID_Option.value);
+            } else {
+                console.error('You MUST set CHANNEL-ID when sora mode.');
+            }
+
+            if (autoOption.checked) {
+                options.push(autoOption.value);
+            }
+            if (videoCodecOption.value !== '') {
+                options.push(videoCodecOption.value);
+            }
+            if (audioCodecOption.value !== '') {
+                options.push(audioCodecOption.value);
+            }
+            if (videoBitrateOption.value !== '') {
+                options.push('--video-bitrate ' + videoBitrateOption.value);
+            }
+            if (audioBitrateOption.value !== '') {
+                options.push('--audio-bitrate ' + audioBitrateOption.value);
+            }
+            if (multistreamOption.checked) {
+                options.push(multistreamOption.value);
+            }
+            if (roleOption.value !== '') {
+                options.push(roleOption.value);
+            }
+            if (spotlightOption.value !== '') {
+                options.push('--spotlight ' + spotlightOption.value);
+            }
+            if (metadataOption.value !== '') {
+                options.push('--metadata ' + metadataOption.value);
+            }
+        }
+
         let executeCommand = '$ ./momo';
         options.forEach(option => {
             executeCommand += ' ' + option;
         });
         executeCommandText.innerText = executeCommand;
         console.log(options);
+    }
+
+    const bodyElement = document.getElementsByTagName('body')[0];
+    bodyElement.addEventListener('change', e => {
+        updateExecuteCommandText();
     });
+    bodyElement.addEventListener('keyup', e => {
+        updateExecuteCommandText();
+    })
+    runButton.addEventListener('click', () => {
+
+    });
+    resetButton.addEventListener('click', () => {
+        location.reload();
+    })
+
+    init();
 })();
