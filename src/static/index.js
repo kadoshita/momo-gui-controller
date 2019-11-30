@@ -8,7 +8,6 @@
     const forceI420Option = document.getElementsByName('force-i420')[0];
     const useNativeOption = document.getElementsByName('use-native')[0];
     const videoDeviceOption = document.getElementsByName('video-device')[0];
-    const videoDeviceValue = document.getElementsByName('video-device-value')[0];
     const resolutionOption = document.getElementsByName('resolution')[0];
     const framerateOption = document.getElementsByName('framerate')[0];
     const fixedResolution = document.getElementsByName('fixed-resolution')[0];
@@ -47,8 +46,8 @@
         if (useNativeOption.checked) {
             options.push(useNativeOption.value);
         }
-        if (videoDeviceOption.checked) {
-            options.push(videoDeviceOption.value + ' ' + videoDeviceValue.value);
+        if (videoDeviceOption.value !== '') {
+            options.push('--video-device ' + videoDeviceOption.value);
         }
         if (resolutionOption.value !== '') {
             options.push(resolutionOption.value);
