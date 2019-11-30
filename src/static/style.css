@@ -1,0 +1,11 @@
+.container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.subcommands{
+    grid-column: 1;
+}
+.options{
+    grid-column: 2;
+}

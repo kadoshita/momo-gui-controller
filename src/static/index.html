@@ -12,6 +12,159 @@
 
 <body>
     <h1>Momo GUI Controller</h1>
+    <div class="container">
+        <section class="subcommands">
+            <h2>サブコマンド</h2>
+            <div>
+                <p>開発向け</p>
+                <label><input type="radio" name="subcommand" value="test" checked>test</label>
+            </div>
+            <div>
+                <p>WebRTC Signaling Server Ayame</p>
+                <label><input type="radio" name="subcommand" value="ayame">ayame</label>
+            </div>
+            <div>
+                <p>WebRTC SFU Sora</p>
+                <label><input type="radio" name="subcommand" value="sora">sora</label>
+            </div>
+        </section>
+        <section class="options">
+            <h2>オプション</h2>
+            <div>
+                <label><input type="checkbox" name="no-video" value="--no-video">ビデオを表示しない</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="no-audio" value="--no-audio">オーディオを出さない</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="force-i420" value="--force-i420">強制的にI420にする（対応デバイスのみ）</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="use-native"
+                        value="--use-native">MJPEGのデコードとビデオのリサイズをハードウェアで行う（対応デバイスのみ）</label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="video-device" value="--video-device"><input type="text"
+                        name="video-device-value" value="">デバイス番号、またはデバイス名。省略時はデフォルト（デバイス番号が0）のビデオデバイスを自動検出
+                </label>
+            </div>
+            <div>
+                <label>
+                    <select name="resolution">
+                        <option value="--resolution VGA" selected>VGA</option>
+                        <option value="--resolution QVGA">QVGA</option>
+                        <option value="--resolution HD">HD</option>
+                        <option value="--resolution FHD">FHD</option>
+                        <option value="--resolution 4K">4K</option>
+                    </select>
+                    解像度
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="number" min="1" max="60" step="1" name="framerate" value="15">フレームレート
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="fixed-resolution" value="--fixed-resolution">固定解像度
+                </label>
+            </div>
+            <div>
+                <label>
+                    <select name="priority">
+                        <option value="--priority BALANCE">BALANCE</option>
+                        <option value="--priority FRAMERATE">FRAMERATE</option>
+                        <option value="--priority RESOLUTION">RESOLUTION</option>
+                    </select>
+                    優先設定 (Experimental)
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="number" min="0" max="65535" step="1" name="port" value="8080">ポート番号(デフォルト:8080)
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="use-sdl" value="--use-sdl">SDLを使い映像を表示する
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="show-me" value="--show-me">自分のカメラも表示する
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="number" min="180" max="16384" step="1" name="window-width" value="480">映像を表示するウィンドウの横幅
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="number" min="180" max="16384" step="1" name="window-height" value="360">映像を表示するウィンドウの縦幅
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="fullscreen" value="--fullscreen">映像を表示するウィンドウをフルスクリーンにする
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="checkbox" name="daemon" value="--daemon">デーモン化する
+                </label>
+            </div>
+            <div>
+                <label>
+                    <select name="log-level">
+                        <option value="--log-level 0">verbose</option>
+                        <option value="--log-level 1">info</option>
+                        <option value="--log-level 2">warning</option>
+                        <option value="--log-level 3">error</option>
+                        <option value="--log-level 4">none</option>
+                    </select>
+                    ログレベル
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="disable-echo-cancellation"
+                        value="--disable-echo-cancellation">エコーキャンセルを無効
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="disable-auto-gain-control"
+                        value="--disable-auto-gain-control">オートゲインコントロール無効
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="disable-noise-suppression"
+                        value="--disable-noise-suppression">ノイズサプレッション無効
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="disable-highpass-filter" value="--disable-highpass-filter">ハイパスフィルター無効
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="checkbox" name="disable-typing-detection"
+                        value="--disable-typing-detection">タイピングディテクション無効
+                </label>
+            </div>
+
+        </section>
+    </div>
+    <section>
+        <button>リセット</button>
+        <button>実行</button>
+    </section>
 </body>
 
 </html>
