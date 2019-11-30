@@ -1,0 +1,19 @@
+{
+  "name": "momo-gui-controller",
+  "version": "1.0.0",
+  "description": "WebRTC Native Client MomoのコマンドラインオプションをGUI上で設定するツールです。",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadoshita/momo-gui-controller.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kadoshita/momo-gui-controller/issues"
+  },
+  "homepage": "https://github.com/kadoshita/momo-gui-controller#readme"
+}
