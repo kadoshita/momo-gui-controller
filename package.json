@@ -4,7 +4,8 @@
   "description": "WebRTC Native Client MomoのコマンドラインオプションをGUI上で設定するツールです。",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./src/main.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/kadoshita/momo-gui-controller/issues"
   },
-  "homepage": "https://github.com/kadoshita/momo-gui-controller#readme"
+  "homepage": "https://github.com/kadoshita/momo-gui-controller#readme",
+  "devDependencies": {
+    "electron": "^7.1.2",
+    "electron-packager": "^14.1.1"
+  }
 }
