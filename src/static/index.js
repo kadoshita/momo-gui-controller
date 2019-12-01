@@ -1,6 +1,9 @@
 (() => {
+    const { ipcRenderer } = window.require('electron');
+    const { RUN_COMMAND, STOP_PROCESS } = window.require('../defines');
     const executeCommandText = document.getElementById('execute-command');
     const runButton = document.getElementById('run-button');
+    const stopButton = document.getElementById('stop-button');
     const resetButton = document.getElementById('reset-button');
 
     const subcommandRadioButton = document.getElementsByName('subcommand');
@@ -236,11 +239,20 @@
         updateExecuteCommandText();
     })
     runButton.addEventListener('click', () => {
-
+        let executeCommand = './momo';
+        options.forEach(option => {
+            executeCommand += ' ' + option;
+        });
+        ipcRenderer.send(RUN_COMMAND, {
+            executeCommandText: executeCommand
+        });
     });
     resetButton.addEventListener('click', () => {
         location.reload();
-    })
+    });
+    stopButton.addEventListener('click', () => {
+        ipcRenderer.send(STOP_PROCESS);
+    });
 
     init();
 })();
