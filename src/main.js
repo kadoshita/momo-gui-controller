@@ -35,6 +35,10 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, './static/index.html'));
     mainWindow.on('closed', () => {
         mainWindow = null;
+        if (momo_process !== null) {
+            momo_process.kill('SIGINT');
+            momo_process = null;
+        }
     });
 };
 
