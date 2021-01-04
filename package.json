@@ -1,0 +1,13 @@
+{
+  "name": "momo-gui-controller",
+  "version": "0.0.1",
+  "repository": "https://github.com/kadoshita/momo-gui-controller.git",
+  "author": "kadoshita <sublimer.me@gmail.com>",
+  "license": "MIT",
+  "main": "./src/main/dist/main.js",
+  "scripts": {
+    "start": "npm-run-all --parallel render main",
+    "render": "cd ./src/render && yarn start",
+    "main": "cd ./src/main && sleep 2 && yarn start"
+  }
+}
