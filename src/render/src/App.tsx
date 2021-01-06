@@ -1,7 +1,8 @@
 import React from 'react';
 import { IpcRenderer } from 'electron';
-import logo from './logo.svg';
 import './App.css';
+import { Accordion, AccordionDetails, AccordionSummary, Container, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons';
 
 declare global {
   interface Window {
@@ -14,30 +15,95 @@ if (window.ipcRenderer) {
     console.log('pong');
   });
 }
-const handleClick = () => {
-  console.log('ping');
-  window.ipcRenderer.send('ping');
-};
-function App() {
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      flexBasis: '33.33%',
+      flexShrink: 0,
+    },
+    secondaryHeading: {
+      fontSize: theme.typography.pxToRem(15),
+      color: theme.palette.text.secondary,
+    },
+  }),
+);
+
+const App = () => {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={handleClick}>Ping</button>
-      </header>
-    </div>
+    <Container>
+      <div className={classes.root}>
+        <Accordion expanded={expanded === 'general-settings'} onChange={handleChange('general-settings')}>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="general-settings-content"
+            id="general-settings-header"
+          >
+            <Typography className={classes.heading}>General settings</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'test-mode-settings'} onChange={handleChange('test-mode-settings')}>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="test-mode-settings-content"
+            id="test-mode-settings-header"
+          >
+            <Typography className={classes.heading}>Test mode settings</Typography>
+            <Typography className={classes.secondaryHeading}>
+              Mode for momo development with simple HTTP server
+          </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'ayame-mode-settings'} onChange={handleChange('ayame-mode-settings')}>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="ayame-mode-settings-content"
+            id="ayame-mode-settings-header"
+          >
+            <Typography className={classes.heading}>Ayame mode settings</Typography>
+            <Typography className={classes.secondaryHeading}>
+              Mode for working with WebRTC Signaling Server Ayame
+          </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+
+          </AccordionDetails>
+        </Accordion>
+        <Accordion expanded={expanded === 'sora-mode-settings'} onChange={handleChange('sora-mode-settings')}>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls="sora-mode-settings-content"
+            id="sora-mode-settings-header"
+          >
+            <Typography className={classes.heading}>Sora mode settings</Typography>
+            <Typography className={classes.secondaryHeading}>
+              Mode for working with WebRTC SFU Sora
+          </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </Container>
   );
-}
+};
 
 export default App;

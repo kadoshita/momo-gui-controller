@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
+import url from 'url';
+import logger from 'electron-log';
 
 ipcMain.on('ping', e => {
     console.log('ping -> pong');
@@ -8,7 +10,8 @@ ipcMain.on('ping', e => {
 const getResourceDirectory = () => {
     return process.env.NODE_ENV === 'development'
         ? path.join(process.cwd(), 'dist')
-        : path.join(process.resourcesPath, 'app.asar.unpacked', 'dist');
+        : process.resourcesPath
+    // : path.join(process.resourcesPath, 'app.asar.unpacked');
 };
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -17,15 +20,21 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: false,
-            preload: process.env.NODE_ENV === 'development' ? path.resolve(getResourceDirectory(), 'preload.js') : ''
+            preload: path.resolve(__dirname, 'preload.js')
         }
     });
-    return win.loadURL('http://localhost:3000');
+    if (process.env.NODE_ENV === 'development') {
+        return win.loadURL('http://localhost:3000');
+    } else {
+        return win.loadFile('./build/index.html');
+    }
 };
 
 const main = async () => {
     await app.whenReady();
+    logger.info('launch');
     await createWindow();
+
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
             app.quit();

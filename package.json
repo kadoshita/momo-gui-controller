@@ -8,6 +8,12 @@
   "scripts": {
     "start": "npm-run-all --parallel render main",
     "render": "cd ./src/render && yarn start",
-    "main": "cd ./src/main && sleep 2 && yarn start"
+    "main": "cd ./src/main && sleep 2 && yarn start",
+    "build:render": "cd ./src/render && yarn build",
+    "build:main": "cd ./src/main && yarn build",
+    "build": "npm-run-all --serial build:render build:main"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
