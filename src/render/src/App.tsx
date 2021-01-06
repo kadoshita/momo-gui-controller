@@ -3,6 +3,10 @@ import { IpcRenderer } from 'electron';
 import './App.css';
 import { Accordion, AccordionDetails, AccordionSummary, Container, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
+import GeneralSettings from './GeneralSettings';
+import TestModeSettings from './TestModeSettings';
+import AyameModeSettings from './AyameModeSettings';
+import SoraModeSettings from './SoraModeSettings';
 
 declare global {
   interface Window {
@@ -11,7 +15,7 @@ declare global {
 }
 
 if (window.ipcRenderer) {
-  window.ipcRenderer.on('pong', e => {
+  window.ipcRenderer.on('pong', () => {
     console.log('pong');
   });
 }
@@ -53,7 +57,7 @@ const App = () => {
             <Typography className={classes.heading}>General settings</Typography>
           </AccordionSummary>
           <AccordionDetails>
-
+            <GeneralSettings></GeneralSettings>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'test-mode-settings'} onChange={handleChange('test-mode-settings')}>
@@ -68,7 +72,7 @@ const App = () => {
           </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
+            <TestModeSettings></TestModeSettings>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'ayame-mode-settings'} onChange={handleChange('ayame-mode-settings')}>
@@ -83,7 +87,7 @@ const App = () => {
           </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
+            <AyameModeSettings></AyameModeSettings>
           </AccordionDetails>
         </Accordion>
         <Accordion expanded={expanded === 'sora-mode-settings'} onChange={handleChange('sora-mode-settings')}>
@@ -98,7 +102,7 @@ const App = () => {
           </Typography>
           </AccordionSummary>
           <AccordionDetails>
-
+            <SoraModeSettings></SoraModeSettings>
           </AccordionDetails>
         </Accordion>
       </div>
