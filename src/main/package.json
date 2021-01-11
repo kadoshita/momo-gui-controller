@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "prestart": "tsc",
-    "start": "NODE_ENV=development ELECTRON_DISABLE_SECURITY_WARNINGS=true electron ./dist/main.js",
+    "start": "NODE_ENV=development ELECTRON_DISABLE_SECURITY_WARNINGS=true electron ./main.js",
     "build": "tsc && cp -r ../render/build ./ && node ./build.js"
   },
   "devDependencies": {

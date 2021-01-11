@@ -1,18 +1,11 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import url from 'url';
 import logger from 'electron-log';
 
 ipcMain.on('ping', e => {
     console.log('ping -> pong');
     return e.sender.send('pong');
 });
-const getResourceDirectory = () => {
-    return process.env.NODE_ENV === 'development'
-        ? path.join(process.cwd(), 'dist')
-        : process.resourcesPath
-    // : path.join(process.resourcesPath, 'app.asar.unpacked');
-};
 const createWindow = () => {
     const win = new BrowserWindow({
         height: 720,
@@ -20,7 +13,7 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: false,
-            preload: path.resolve(__dirname, 'preload.js')
+            preload: './preload.js'
         }
     });
     if (process.env.NODE_ENV === 'development') {
