@@ -1,5 +1,4 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import path from 'path';
 import logger from 'electron-log';
 
 ipcMain.on('ping', e => {

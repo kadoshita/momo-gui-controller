@@ -27,19 +27,5 @@ export type SoraModeSettingsType = {
 
 export const defaultSoraModeSettings: SoraModeSettingsType = {
     signalingUrl: 'wss://example.com/signaling',
-    channelID: '',
-    video: true,
-    audio: true,
-    videoCodecType: '',
-    audioCodecType: '',
-    videoBitRate: 0,
-    audioBitRate: 0,
-    auto: false,
-    metadata: '',
-    role: 'upstream',
-    multistream: false,
-    spotlight: false,
-    spotlightNumber: 0,
-    port: -1,
-    simulcast: false
+    channelID: ''
 };

@@ -14,7 +14,5 @@ export type AyameModeSettingsType = {
 };
 export const defaultAyameModeSettings: AyameModeSettingsType = {
     signalingUrl: '',
-    roomID: '',
-    clientID: '',
-    signalingKey: ''
+    roomID: ''
 };

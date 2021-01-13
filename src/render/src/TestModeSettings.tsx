@@ -7,10 +7,7 @@ const TestModeSettings = () => {
 export default TestModeSettings;
 
 export type TestModeSettingsType = {
-    documentRoot: string,
-    port: number
+    documentRoot?: string,
+    port?: number
 };
-export const defaultTestModeSetings: TestModeSettingsType = {
-    documentRoot: '',
-    port: 8080
-};
+export const defaultTestModeSetings: TestModeSettingsType = {};
