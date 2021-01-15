@@ -1,27 +1,29 @@
 import React from 'react';
-import { withFormik } from 'formik';
-import { Button, FormControlLabel, Switch } from '@material-ui/core';
-const GeneralSettings = (props: { values: GeneralSettingsType; handleChange: ((e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void); handleSubmit: ((e: React.FormEvent<HTMLFormElement>) => void); }) => {
-    const { values, handleChange, handleSubmit } = props;
+import { useForm, Controller } from 'react-hook-form';
+import { Button, Switch } from '@material-ui/core';
+const GeneralSettings = () => {
+    const { handleSubmit, control } = useForm<GeneralSettingsType>();
+    const onSubmit = (data: any) => console.log(data);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <FormControlLabel
-                control={<Switch checked={values.noGoogleStun} onChange={handleChange} name='noGoogleStun'></Switch>}
-                label='noGoogleStun'></FormControlLabel>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+                name='noGoogleStun'
+                control={control}
+                defaultValue={false}
+                render={props =>
+                    <Switch
+                        onChange={e => props.onChange(e.target.checked)}
+                        checked={props.value}></Switch>
+                }
+            />
+
             <Button type='submit' fullWidth variant='contained' color='primary'>設定</Button>
         </form>
     )
 };
 
-export default withFormik({
-    mapPropsToValues: () => ({ noGoogleStun: false }),
-    handleSubmit: (values, { setSubmitting }) => {
-        console.log(values);
-        setSubmitting(false);
-    },
-    displayName: 'GeneralSettings'
-})(GeneralSettings);
+export default GeneralSettings
 
 export type GeneralSettingsType = {
     noGoogleStun?: boolean,
