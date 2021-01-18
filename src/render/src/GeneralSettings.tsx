@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Button, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, Switch, TextField } from '@material-ui/core';
+import { Button, Checkbox, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 
 const SwitchFormItem = (formProps: { name: string, control: any }) => {
     return (
         <Controller name={formProps.name} control={formProps.control} defaultValue={false}
             render={props =>
                 <FormControlLabel
-                    control={<Switch onChange={e => props.onChange(e.target.checked)} checked={props.value}></Switch>}
+                    control={<Checkbox onChange={e => props.onChange(e.target.checked)} checked={props.value} color='primary'></Checkbox>}
                     label={formProps.name}
                     labelPlacement='end'
                 ></FormControlLabel>
