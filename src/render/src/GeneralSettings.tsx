@@ -68,7 +68,7 @@ const GeneralSettings = () => {
                     <TextField inputRef={register({ pattern: /(QVGA|VGA|HD|FHD|4K|\d+x\d+)/ })} label='resolution' name='resolution' fullWidth variant='outlined' placeholder='one of QVGA, VGA, HD, FHD, 4K, or [WIDTH]x[HEIGHT]' InputLabelProps={{ shrink: true }} defaultValue='VGA'></TextField>
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField inputRef={register({ min: 1, max: 60 })} label='framerate' name='framerate' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 1, max: 60 }} defaultValue='30'></TextField>
+                    <TextField inputRef={register({ min: 1, max: 60, valueAsNumber: true })} label='framerate' name='framerate' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 1, max: 60 }} defaultValue='30'></TextField>
                 </Grid>
                 <Grid item xs={6}>
                     <SwitchFormItem name='fixedResolution' control={control}></SwitchFormItem>
@@ -83,10 +83,10 @@ const GeneralSettings = () => {
                     <SwitchFormItem name='showMe' control={control}></SwitchFormItem>
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField inputRef={register({ min: 180, max: 16384 })} label='windowWidth' name='windowWidth' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 180, max: 1634 }} defaultValue='640'></TextField>
+                    <TextField inputRef={register({ min: 180, max: 16384, valueAsNumber: true })} label='windowWidth' name='windowWidth' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 180, max: 1634 }} defaultValue='640'></TextField>
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField inputRef={register({ min: 180, max: 16384 })} label='windowHeight' name='windowHeight' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 180, max: 1634 }} defaultValue='480'></TextField>
+                    <TextField inputRef={register({ min: 180, max: 16384, valueAsNumber: true })} label='windowHeight' name='windowHeight' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: 180, max: 1634 }} defaultValue='480'></TextField>
                 </Grid>
                 <Grid item xs={6}>
                     <SwitchFormItem name='fullscreen' control={control}></SwitchFormItem>
@@ -101,7 +101,7 @@ const GeneralSettings = () => {
                     <SwitchFormItem name='screenCapture' control={control}></SwitchFormItem>
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField inputRef={register({ min: -1, max: 65535 })} label='metricsPort' name='metricsPort' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: -1, max: 65535 }} defaultValue='-1'></TextField>
+                    <TextField inputRef={register({ min: -1, max: 65535, valueAsNumber: true })} label='metricsPort' name='metricsPort' fullWidth variant='outlined' type='number' InputLabelProps={{ shrink: true }} inputProps={{ min: -1, max: 65535 }} defaultValue='-1'></TextField>
                 </Grid>
                 <Grid item xs={6}>
                     <SwitchFormItem name='metricsAllowExternalIp' control={control}></SwitchFormItem>
@@ -156,7 +156,7 @@ const GeneralSettings = () => {
     )
 };
 
-export default GeneralSettings
+export default GeneralSettings;
 
 // c.f. https://github.com/shiguredo/momo/blob/develop/doc/USE.md
 export type GeneralSettingsType = {
